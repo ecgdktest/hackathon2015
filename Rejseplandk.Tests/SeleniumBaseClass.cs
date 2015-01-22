@@ -21,26 +21,6 @@ namespace Rejseplandk.Tests
             get { return _browserFac.Value; }
         }
 
-        public bool ExistsAndVisibleElement(IWebDriver driver, By by, int timeoutInSeconds = 5)
-        {
-            bool flag = false;
-            try
-            {
-                if (timeoutInSeconds > 0)
-                {
-                    IWebElement webElement = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds)).Until(drv => drv.FindElement(@by));
-                    if (webElement != null && webElement.Displayed)
-                        flag = true;
-                }
-                IWebElement element = driver.FindElement(@by);
-                flag = element != null && element.Displayed;
-            }
-            catch (Exception ex)
-            {
-            }
-            return flag;
-        }
-
         public void Dispose()
         {
             ResetDriver();

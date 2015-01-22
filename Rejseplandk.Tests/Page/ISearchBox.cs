@@ -5,5 +5,7 @@
         string To { get; set; }
         string From { get; set; }
         void Search();
+        void Expand();
+
     }
 }

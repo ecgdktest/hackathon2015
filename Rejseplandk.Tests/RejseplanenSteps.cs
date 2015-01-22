@@ -30,29 +30,44 @@ namespace Rejseplandk.Tests
             Driver.Search.Search();
         }
 
+        [When(@"I expand the Searchbar section")]
+        public void WhenIExpandTheSearchbarSection()
         [Given(@"I pick a date '(.*)'")]
         public void GivenIPickADate(string p0)
         {
+            Driver.Search.Expand();
             ScenarioContext.Current.Pending();
         }
+        
+        [When(@"I enter the time:\t'(.*)'")]
+        public void WhenIEnterTheTime(string p0)
 
         [Given(@"I choose traveltype '(.*)'")]
         public void GivenIChooseTraveltype(string p0)
         {
             ScenarioContext.Current.Pending();
         }
+        
+        [Then(@"I see the Searchbar")]
+        public void ThenISeeTheSearchbar()
 
         [Given(@"I pick return '(.*)'")]
         public void GivenIPickReturn(string p0)
         {
+            Driver.Search.SearchBarIsVisible();
             ScenarioContext.Current.Pending();
         }
+        
+        [Then(@"I see search results")]
+        public void ThenISeeSearchResults()
 
         [Then(@"take a screenshoot")]
         public void ThenTakeAScreenshoot()
         {
             ScenarioContext.Current.Pending();
         }
+
+    
 
 
         [Then(@"I get at least (.*) travelplan")]

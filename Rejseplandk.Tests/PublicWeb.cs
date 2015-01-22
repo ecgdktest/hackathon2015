@@ -21,7 +21,7 @@ namespace Rejseplandk.Tests
         {
             get
             {
-                return new SearchBox(Driver, By.Id("hafasfrom"), By.Id("hafasto"), By.Name("start"));
+                return new SearchBox(Driver, By.Id("hafasfrom"), By.Id("hafasto"), By.ClassName("formBoxDate"), By.ClassName("formBoxTime"), By.Name("start"), By.ClassName("openForm"));
             }
         }
     }

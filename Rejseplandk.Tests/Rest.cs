@@ -70,6 +70,9 @@ namespace Rejseplandk.Tests
             }
         }
 
+        public void Expand()
+        {
+        }
         private XElement AsJson(HttpClient client, string s)
         {
             var xElement =

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
 
 namespace Rejseplandk.Tests
@@ -48,6 +49,28 @@ namespace Rejseplandk.Tests
         {
             FindElement(search).Click();
         }
+
+        public bool ExistsAndVisibleElement(By by, int timeoutInSeconds = 5)
+        {
+            bool flag = false;
+            try
+            {
+                if (timeoutInSeconds > 0)
+                {
+                    IWebElement webElement = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds)).Until(drv => drv.FindElement(@by));
+                    if (webElement != null && webElement.Displayed)
+                        flag = true;
+                }
+                IWebElement element = _driver.FindElement(@by);
+                flag = element != null && element.Displayed;
+            }
+            catch (Exception ex)
+            {
+            }
+            return flag;
+        }
+
+
     }
 
     abstract partial class RejseplanenFeature { }

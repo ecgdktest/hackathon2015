@@ -3,8 +3,7 @@
 @mytag
 Scenario Outline: Add two numbers
 	Given I am on the frontpage
-	And I enter from: '<from>'
-	And I enter to: '<to>'
+	And I fill search: '<from>' and '<to>'
 	And I pick a date '<Dato>'
 	And I choose traveltype '<TravelType>'
 	And I pick return '<Travel>'

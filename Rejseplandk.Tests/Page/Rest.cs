@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -38,44 +39,43 @@ namespace Rejseplandk.Tests
 
     public class RestSearchBox : ISearchBox
     {
-        private IEnumerable<XElement> trips;
+        public IEnumerable<XElement> Trips { get; private set; }
         public string To { get; set; }
         public string From { get; set; }
-
-        public IEnumerable<XElement> Trips
-        {
-            get { return trips; }
-            private set { trips = value; }
-        }
 
         public void Search()
         {
             using (var client = new HttpClient())
             {
+                XElement from = AsJson(client, "/location?input=" + From);
+                XElement to = AsJson(client, "/location?input=" + To);
 
-                var from = AsJson(client, "/location?input=" + From);
-                var to = AsJson(client, "/location?input=" + To);
+                NameValueCollection nameValueCollection = HttpUtility.ParseQueryString("");
 
-            var nameValueCollection = HttpUtility.ParseQueryString("");
+                nameValueCollection["originCoordName"] = (string) from.Attribute("name");
+                nameValueCollection["originCoordX"] = (string) from.Attribute("x");
+                nameValueCollection["originCoordY"] = (string) from.Attribute("y");
+                nameValueCollection["destCoordName"] = (string) to.Attribute("name");
+                nameValueCollection["destCoordX"] = (string) to.Attribute("x");
+                nameValueCollection["destCoordY"] = (string) to.Attribute("y");
 
-            nameValueCollection["originCoordName"] = (string)from.Attribute("name");
-            nameValueCollection["originCoordX"] = (string)from.Attribute("x");
-            nameValueCollection["originCoordY"] = (string)from.Attribute("y");
-            nameValueCollection["destCoordName"] = (string)to.Attribute("name");
-            nameValueCollection["destCoordX"] = (string)to.Attribute("x");
-            nameValueCollection["destCoordY"] = (string)to.Attribute("y");
-
-            string url = "http://hackathon.rejseplanen.dk/bin/rest.exe/trip?" + nameValueCollection;
-            Trips = XElement.Parse(client.GetAsync(url).Result.Content.ReadAsStringAsync().Result).Descendants("Trip");
+                string url = "http://hackathon.rejseplanen.dk/bin/rest.exe/trip?" + nameValueCollection;
+                Trips =
+                    XElement.Parse(client.GetAsync(url).Result.Content.ReadAsStringAsync().Result).Descendants("Trip");
             }
         }
 
         public void Expand()
         {
         }
+
+        public void SearchBarIsVisible()
+        {
+        }
+
         private XElement AsJson(HttpClient client, string s)
         {
-            var xElement =
+            XElement xElement =
                 XElement.Parse(
                     client.GetAsync("http://hackathon.rejseplanen.dk/bin/rest.exe" + s)
                         .Result.Content.ReadAsStringAsync()

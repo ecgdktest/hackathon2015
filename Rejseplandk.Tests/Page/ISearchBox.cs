@@ -7,5 +7,6 @@
         void Search();
         void Expand();
 
+        void SearchBarIsVisible();
     }
 }

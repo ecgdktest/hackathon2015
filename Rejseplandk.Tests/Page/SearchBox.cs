@@ -19,8 +19,8 @@ namespace Rejseplandk.Tests
         {
             _toField = fromField;
             _fromField = toField;
-            _dateField = _dateField;
-            _timeField = _timeField;
+            _dateField = dateField;
+            _timeField = timeField;
             _search = startButton;
             _expand = expand;
         }

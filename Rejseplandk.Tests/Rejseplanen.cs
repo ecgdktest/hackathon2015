@@ -64,7 +64,7 @@ namespace Rejseplandk.Tests
                 IWebElement element = _driver.FindElement(@by);
                 flag = element != null && element.Displayed;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             return flag;

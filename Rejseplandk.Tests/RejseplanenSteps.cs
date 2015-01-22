@@ -30,6 +30,30 @@ namespace Rejseplandk.Tests
             Driver.Search.Search();
         }
 
+        [Given(@"I pick a date '(.*)'")]
+        public void GivenIPickADate(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Given(@"I choose traveltype '(.*)'")]
+        public void GivenIChooseTraveltype(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Given(@"I pick return '(.*)'")]
+        public void GivenIPickReturn(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"take a screenshoot")]
+        public void ThenTakeAScreenshoot()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
 
         [Then(@"I get at least (.*) travelplan")]
         public void ThenIGetAtLeastTravelplan(int p0)

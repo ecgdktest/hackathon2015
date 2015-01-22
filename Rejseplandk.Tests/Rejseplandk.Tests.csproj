@@ -52,21 +52,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDriverFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RejseplanenSteps.cs" />
-    <Compile Include="SimpleFeature1.feature.cs">
+    <Compile Include="SeleniumBaseClass.cs" />
+    <Compile Include="Rejseplanen.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SimpleFeature.feature</DependentUpon>
+      <DependentUpon>Rejseplanen.feature</DependentUpon>
     </Compile>
-    <Compile Include="SimpleFeatureFeature.cs" />
+    <Compile Include="Rejseplanen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="SimpleFeature.feature">
+    <None Include="Rejseplanen.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SimpleFeature1.feature.cs</LastGenOutput>
+      <LastGenOutput>Rejseplanen.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

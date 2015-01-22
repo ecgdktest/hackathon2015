@@ -1,4 +1,7 @@
-﻿using TechTalk.SpecFlow;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using TechTalk.SpecFlow;
 
 namespace Rejseplandk.Tests
 {
@@ -88,5 +91,17 @@ namespace Rejseplandk.Tests
         {
             ScenarioContext.Current.Get<Driver>().ContainsSearchResult(p0);
         }
+
+        [Given(@"I fill search: '(.*)' and '(.*)'")]
+        public void GivenIFillSearchAnd(string from, string to)
+        {
+            var froms = locations[@from];
+            Driver.Search.From = froms.ElementAt(rand.Next(froms.Length));
+            var tos = locations[@from];
+            Driver.Search.From = tos.ElementAt(rand.Next(tos.Length));
+        }
+        private Random rand = new Random();
+        private IDictionary<string, string[]> locations = new Dictionary<string, string[]> {{"POI", new []{"Tivoli", "Havefruen"}}, {"Telefon nr", new []{"51515151", "12341234"}},{"Street", new []{"Axel kiers vej 11","Aarhus Vej"}}};
+
     }
 }

@@ -24,24 +24,40 @@ namespace Rejseplandk.Tests
 
         protected void SetText(By byId, string value)
         {
-            _driver.FindElement(byId).SendKeys(value);
+            FindElement(byId).SendKeys(value);
+        }
+
+        private IWebElement FindElement(By byId)
+        {
+            try
+            {
+                return _driver.FindElement(byId);
+            }
+            catch (NoSuchElementException ex)
+            {
+                throw new Exception(string.Format("Could not find:{0}", byId), ex);
+            }
         }
 
         protected string GetText(By byId)
         {
-            return _driver.FindElement(byId).Text;
+            return FindElement(byId).Text;
         }
 
         protected void Click(By search)
         {
-            _driver.FindElement(search).Click();
+            FindElement(search).Click();
         }
     }
 
     abstract partial class RejseplanenFeature { }
 
     [TestFixture(typeof(PublicWeb<ChromeDriverFactory>))]
+    [TestFixture(typeof(PublicWeb<IEDriverFactory>))]
+    [TestFixture(typeof(PublicWeb<RemoteDriverFactory>))]
+    [TestFixture(typeof(MWeb<RemoteDriverFactory>))]
     [TestFixture(typeof(MWeb<ChromeDriverFactory>))]
+    [TestFixture(typeof(MWeb<IEDriverFactory>))]
     [TestFixture(typeof(Rest))]
     public class RejseplanenFeature<T> : RejseplanenFeature where T : Driver
     {

@@ -66,7 +66,6 @@ namespace Rejseplandk.Tests
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add two numbers")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         [NUnit.Framework.TestCaseAttribute("POI", "Telefon nr", "Fremtid", "Ankomst", "Enkelt", null)]
         [NUnit.Framework.TestCaseAttribute("POI", "POI", "I dag", "Afgang", "Retur", null)]
         [NUnit.Framework.TestCaseAttribute("Telefon nr", "POI", "Fremtid", "Afgang", "Enkelt", null)]
@@ -85,30 +84,24 @@ namespace Rejseplandk.Tests
         [NUnit.Framework.TestCaseAttribute("Station", "Telefon nr", "I dag", "Ankomst", "Retur", null)]
         public virtual void AddTwoNumbers(string to, string from, string dato, string travelType, string travel, string[] exampleTags)
         {
-            string[] @__tags = new string[] {
-                    "mytag"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", @__tags);
-#line 4
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", exampleTags);
+#line 3
 this.ScenarioSetup(scenarioInfo);
-#line 5
+#line 4
  testRunner.Given("I am on the frontpage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 6
+#line 5
  testRunner.And("I fill search: \'<from>\' and \'<to>\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 7
+#line 6
  testRunner.And(string.Format("I pick a date \'{0}\'", dato), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 8
+#line 7
  testRunner.And(string.Format("I choose traveltype \'{0}\'", travelType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 9
+#line 8
  testRunner.And(string.Format("I pick return \'{0}\'", travel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
+#line 9
  testRunner.When("I Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
+#line 10
  testRunner.Then("I get at least 3 travelplan", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 12
+#line 11
  testRunner.And("take a screenshoot", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

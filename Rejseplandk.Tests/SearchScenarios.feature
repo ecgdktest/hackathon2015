@@ -1,6 +1,5 @@
 ﻿Feature: SearchScenarios
 
-@mytag
 Scenario Outline: Add two numbers
 	Given I am on the frontpage
 	And I fill search: '<from>' and '<to>'

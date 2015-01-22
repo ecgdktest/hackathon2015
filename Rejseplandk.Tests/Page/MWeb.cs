@@ -13,7 +13,7 @@ namespace Rejseplandk.Tests
         {
             get
             {
-                return new SearchBox(Driver, By.Id("tpQuery_from"), By.Id("tpQuery_to"), By.Id("tpQueryDate"), By.Id("tpQuery_time"), By.Name("tpSubmitButton"), By.ClassName("icon-inner"));
+                return new SearchBox(Driver, By.Id("tpQuery_from"), By.Id("tpQuery_to"), By.Id("tpQueryDate"), By.Id("tpQuery_time"), By.Id("tpSubmitButton"), By.ClassName("icon-inner"));
             }
         }
 

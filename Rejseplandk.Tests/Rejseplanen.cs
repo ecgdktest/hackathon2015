@@ -81,11 +81,11 @@ namespace Rejseplandk.Tests
 
 
     [TestFixture(typeof(PublicWeb<ChromeDriverFactory>))]
-    [TestFixture(typeof(PublicWeb<IEDriverFactory>))]
-    [TestFixture(typeof(PublicWeb<RemoteDriverFactory>))]
-    [TestFixture(typeof(MWeb<RemoteDriverFactory>))]
+    //[TestFixture(typeof(PublicWeb<IEDriverFactory>))]
+    //[TestFixture(typeof(PublicWeb<RemoteDriverFactory>))]
+    //[TestFixture(typeof(MWeb<RemoteDriverFactory>))]
     [TestFixture(typeof(MWeb<ChromeDriverFactory>))]
-    [TestFixture(typeof(MWeb<IEDriverFactory>))]
+    //[TestFixture(typeof(MWeb<IEDriverFactory>))]
     [TestFixture(typeof(Rest))]
     public abstract class AllDrivers
     {

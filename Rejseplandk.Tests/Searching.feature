@@ -1,4 +1,6 @@
 ﻿Feature: Searching
+Background: 
+	Given I am on the frontpage
 
 Scenario: I can search for a journey
 	Given I enter from: 'Delta Park 40, 2665 Vallensbæk Strand, Vallensbæk Komm'

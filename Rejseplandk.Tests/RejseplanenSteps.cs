@@ -13,6 +13,22 @@ namespace Rejseplandk.Tests
         {
             Driver.GotoFrontPage();
         }
+        [When(@"I expand the Searchbar section")]
+        public void WhenIExpandTheSearchbarSection()
+        {
+            Driver.Search.ShowSearchBar();
+        }
+
+        [Given(@"I select a travel result")]
+        public void GivenISelectATravelResult()
+        {
+        }
+
+        [Then(@"I see the travel details")]
+        public void ThenISeeTheTravelDetails()
+        {
+        }
+
 
 
         [Given(@"I enter from: '(.*)'")]

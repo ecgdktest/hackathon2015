@@ -25,7 +25,7 @@ namespace Rejseplandk.Tests
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "SimpleFeature.feature"
+#line 1 "Rejseplanen.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]

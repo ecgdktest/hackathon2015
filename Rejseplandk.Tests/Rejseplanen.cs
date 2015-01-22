@@ -1,9 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
 
 namespace Rejseplandk.Tests
@@ -14,35 +11,10 @@ namespace Rejseplandk.Tests
         void ResetDriver();
     }
 
-    class DriverImpl1<TWebDriver> : Driver where TWebDriver : RemoteWebDriver
+    public class PublicWeb<TDriverFactory>: SeleniumBaseClass<TDriverFactory>, Driver where TDriverFactory : IDriverFactory
     {
-        private Lazy<TWebDriver> browserFac;
-
-        public DriverImpl1()
-        {
-            ResetDriver();
-        }
-
-        public static bool ExistsAndVisibleElement(IWebDriver driver, By by, int timeoutInSeconds = 5)
-        {
-            bool flag = false;
-            try
-            {
-                if (timeoutInSeconds > 0)
-                {
-                    IWebElement webElement = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds)).Until(drv => drv.FindElement(@by));
-                    if (webElement != null && webElement.Displayed)
-                        flag = true;
-                }
-                IWebElement element = driver.FindElement(by);
-                flag = element != null && element.Displayed;
-            }
-            catch (Exception ex)
-            {
-            }
-            return flag;
-        }
         private string url = "http://hackathon.rejseplanen.dk";
+
         public void Search(string @from, string to)
         {
             Driver.Navigate().GoToUrl(url);
@@ -52,24 +24,29 @@ namespace Rejseplandk.Tests
             Driver.FindElementByName("start").Click();
         }
 
-        private RemoteWebDriver Driver
-        {
-            get { return browserFac.Value; }
-        }
-
         public void ContainsSearchResult(int p0)
         {
             var readOnlyCollection = Driver.FindElements(By.CssSelector("[id^='ovConRowOUTWARDC']"));
             Assert.That(readOnlyCollection, Has.Count.AtLeast(p0));
         }
 
-        public void Dispose()
+    }
+
+    public class MWeb<T> : SeleniumBaseClass<T>, Driver where T : IDriverFactory
+    {
+        private string url = "http://m-hackathon.rejseplanen.dk";
+
+        public void Search(string @from, string to)
         {
-            ResetDriver();
+            Driver.Navigate().GoToUrl(url);
+            Driver.FindElement(By.Id("tpQuery_from")).SendKeys(@from);
+            Driver.FindElement(By.Id("tpQuery_to")).SendKeys(@to);
+            Driver.FindElement(By.Id("tpSubmitButton")).Click();
         }
 
-        public void ResetDriver()
+        public void ContainsSearchResult(int p0)
         {
+<<<<<<< HEAD:Rejseplandk.Tests/SimpleFeatureFeature.cs
             if (browserFac != null && browserFac.IsValueCreated)
             {
                 browserFac.Value.Close();
@@ -77,13 +54,17 @@ namespace Rejseplandk.Tests
             }
             var driverPath = @"C:\Work\ECG.Selenium\ECG.Selenium.Framework\Executables\";
             browserFac = new Lazy<TWebDriver>(() => (TWebDriver) Activator.CreateInstance(typeof(TWebDriver), new []{driverPath}));
+=======
+>>>>>>> origin/master:Rejseplandk.Tests/Rejseplanen.cs
         }
     }
 
-    abstract partial class SimpleFeatureFeature { }
+    abstract partial class RejseplanenFeature { }
 
-    [TestFixture(typeof (DriverImpl1<ChromeDriver>))]
-    public class SimpleFeatureLa<T> : RejseplanenFeature where T : Driver
+    [TestFixture(typeof(PublicWeb<ChromeDriverFactory>))]
+    [TestFixture(typeof(MWeb<ChromeDriverFactory>))]
+    [TestFixture(typeof(Rest))]
+    public class RejseplanenFeature<T> : RejseplanenFeature where T : Driver
     {
         private Driver _driver;
 
@@ -104,6 +85,26 @@ namespace Rejseplandk.Tests
         {
             base.ScenarioTearDown();
             _driver.ResetDriver();
+        }
+    }
+
+    public class Rest : Driver
+    {
+        public void Search(string @from, string to)
+        {
+        }
+
+        public void ContainsSearchResult(int p0)
+        {
+        }
+
+        public void Dispose()
+        {
+            ResetDriver();
+        }
+
+        public void ResetDriver()
+        {
         }
     }
 }

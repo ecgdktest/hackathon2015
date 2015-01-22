@@ -65,7 +65,7 @@ namespace Rejseplandk.Tests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add two numbers")]
+        [NUnit.Framework.DescriptionAttribute("Search combinations on frontpage")]
         [NUnit.Framework.TestCaseAttribute("POI", "Telefon nr", "Fremtid", "Ankomst", "Enkelt", null)]
         [NUnit.Framework.TestCaseAttribute("POI", "POI", "I dag", "Afgang", "Retur", null)]
         [NUnit.Framework.TestCaseAttribute("Telefon nr", "POI", "Fremtid", "Afgang", "Enkelt", null)]
@@ -82,9 +82,9 @@ namespace Rejseplandk.Tests
         [NUnit.Framework.TestCaseAttribute("Street", "Station", "I dag", "Afgang", "Enkelt", null)]
         [NUnit.Framework.TestCaseAttribute("POI", "Street", "I dag", "Afgang", "Retur", null)]
         [NUnit.Framework.TestCaseAttribute("Station", "Telefon nr", "I dag", "Ankomst", "Retur", null)]
-        public virtual void AddTwoNumbers(string to, string from, string dato, string travelType, string travel, string[] exampleTags)
+        public virtual void SearchCombinationsOnFrontpage(string to, string from, string dato, string travelType, string travel, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search combinations on frontpage", exampleTags);
 #line 3
 this.ScenarioSetup(scenarioInfo);
 #line 4

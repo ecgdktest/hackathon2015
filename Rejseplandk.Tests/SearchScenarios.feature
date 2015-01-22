@@ -1,6 +1,6 @@
 ﻿Feature: SearchScenarios
 
-Scenario Outline: Add two numbers
+Scenario Outline: Search combinations on frontpage
 	Given I am on the frontpage
 	And I fill search: '<from>' and '<to>'
 	And I pick a date '<Dato>'

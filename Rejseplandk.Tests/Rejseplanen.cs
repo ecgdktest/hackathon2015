@@ -87,7 +87,7 @@ namespace Rejseplandk.Tests
     [TestFixture(typeof(MWeb<ChromeDriverFactory>))]
     [TestFixture(typeof(MWeb<IEDriverFactory>))]
     [TestFixture(typeof(Rest))]
-    public class AllDrivers
+    public abstract class AllDrivers
     {
     }
 

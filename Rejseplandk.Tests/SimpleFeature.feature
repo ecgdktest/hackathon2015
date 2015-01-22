@@ -1,11 +1,7 @@
-﻿Feature: SimpleFeature
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+﻿Feature: Rejseplanen
 
-@mytag
-Scenario: Add two numbers
-	Given I have entered 50 into the calculator
-	And I have entered 70 into the calculator
-	When I press add
-	Then the result should be 120 on the screen
+Scenario: I can search for a journey
+	Given I enter from: 'Delta Park 40, 2665 Vallensbæk Strand, Vallensbæk Komm'
+	And I enter to: 'Axel Kiers Vej 11, 8270 Højbjerg, Århus Kommune'
+	When I Search
+	Then I get at least 3 travelplan

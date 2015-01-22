@@ -65,7 +65,7 @@ namespace Rejseplandk.Tests
             }
         }
 
-        public void Expand()
+        public void ShowSearchBar()
         {
         }
 

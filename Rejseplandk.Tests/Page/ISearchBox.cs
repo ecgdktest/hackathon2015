@@ -4,8 +4,11 @@
     {
         string To { get; set; }
         string From { get; set; }
+        string Date { get; set; }
+        string Time { get; set; }
+        
         void Search();
-        void Expand();
+        void ShowSearchBar();
 
         void SearchBarIsVisible();
     }

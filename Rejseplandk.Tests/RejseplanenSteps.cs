@@ -110,10 +110,15 @@ namespace Rejseplandk.Tests
             var froms = locations[@from];
             Driver.Search.From = froms.ElementAt(rand.Next(froms.Length));
             var tos = locations[@from];
-            Driver.Search.From = tos.ElementAt(rand.Next(tos.Length));
+            Driver.Search.To = tos.ElementAt(rand.Next(tos.Length));
         }
         private Random rand = new Random();
-        private IDictionary<string, string[]> locations = new Dictionary<string, string[]> {{"POI", new []{"Tivoli", "Havefruen"}}, {"Telefon nr", new []{"51515151", "12341234"}},{"Street", new []{"Axel kiers vej 11","Aarhus Vej"}}};
+        private IDictionary<string, string[]> locations = new Dictionary<string, string[]>
+        {
+            {"POI", new []{"Tivoli", "Havefruen"}}, 
+            {"Telefon nr", new []{"51515151", "12341234"}},
+            {"Street", new []{"Axel kiers vej 11","Aarhus Vej"}}
+        };
 
     }
 }

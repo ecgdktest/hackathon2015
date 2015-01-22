@@ -1,51 +1,40 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using TechTalk.SpecFlow;
 
 namespace Rejseplandk.Tests
 {
     public interface Driver : IDisposable{
-        void Search(string @from, string to);
         void ContainsSearchResult(int p0);
         void ResetDriver();
+        void GotoFrontPage();
+        ISearchBox Search { get; }
     }
 
-    public class PublicWeb<TDriverFactory>: SeleniumBaseClass<TDriverFactory>, Driver where TDriverFactory : IDriverFactory
+    public class SeleniumBase
     {
-        private string url = "http://hackathon.rejseplanen.dk";
+        private readonly RemoteWebDriver _driver;
 
-        public void Search(string @from, string to)
+        public SeleniumBase(RemoteWebDriver driver)
         {
-            Driver.Navigate().GoToUrl(url);
-            Driver.SwitchTo().Frame("rejseplanen");
-            Driver.FindElement(By.Id("hafasfrom")).SendKeys(@from);
-            Driver.FindElement(By.Id("hafasto")).SendKeys(@to);
-            Driver.FindElementByName("start").Click();
+            _driver = driver;
         }
 
-        public void ContainsSearchResult(int p0)
+        protected void SetText(By byId, string value)
         {
-            var readOnlyCollection = Driver.FindElements(By.CssSelector("[id^='ovConRowOUTWARDC']"));
-            Assert.That(readOnlyCollection, Has.Count.AtLeast(p0));
+            _driver.FindElement(byId).SendKeys(value);
         }
 
-    }
-
-    public class MWeb<T> : SeleniumBaseClass<T>, Driver where T : IDriverFactory
-    {
-        private string url = "http://m-hackathon.rejseplanen.dk";
-
-        public void Search(string @from, string to)
+        protected string GetText(By byId)
         {
-            Driver.Navigate().GoToUrl(url);
-            Driver.FindElement(By.Id("tpQuery_from")).SendKeys(@from);
-            Driver.FindElement(By.Id("tpQuery_to")).SendKeys(@to);
-            Driver.FindElement(By.Id("tpSubmitButton")).Click();
+            return _driver.FindElement(byId).Text;
         }
 
-        public void ContainsSearchResult(int p0)
+        protected void Click(By search)
         {
+            _driver.FindElement(search).Click();
         }
     }
 
@@ -75,26 +64,6 @@ namespace Rejseplandk.Tests
         {
             base.ScenarioTearDown();
             _driver.ResetDriver();
-        }
-    }
-
-    public class Rest : Driver
-    {
-        public void Search(string @from, string to)
-        {
-        }
-
-        public void ContainsSearchResult(int p0)
-        {
-        }
-
-        public void Dispose()
-        {
-            ResetDriver();
-        }
-
-        public void ResetDriver()
-        {
         }
     }
 }

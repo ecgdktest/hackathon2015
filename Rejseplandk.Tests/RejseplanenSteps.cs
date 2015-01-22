@@ -5,25 +5,29 @@ namespace Rejseplandk.Tests
     [Binding]
     public class RejseplanenSteps
     {
-        private string _from;
-        private string _to;
+        [Given(@"I am on the frontpage")]
+        public void GivenIAmOnTheFrontpage()
+        {
+            Driver.GotoFrontPage();
+        }
+
 
         [Given(@"I enter from: '(.*)'")]
         public void GivenIEnterFrom(string from)
         {
-            _from = from;
+            Driver.Search.From = from;
         }
 
         [Given(@"I enter to: '(.*)'")]
         public void GivenIEnterTo(string to)
         {
-            _to = to;
+            Driver.Search.To = to;
         }
 
         [When(@"I Search")]
         public void WhenISearch()
         {
-            ScenarioContext.Current.Get<Driver>().Search(_from, _to);
+            Driver.Search.Search();
         }
 
 
@@ -33,6 +37,9 @@ namespace Rejseplandk.Tests
             ScenarioContext.Current.Get<Driver>().ContainsSearchResult(p0);
         }
 
-
+        private static Driver Driver
+        {
+            get { return ScenarioContext.Current.Get<Driver>(); }
+        }
     }
 }

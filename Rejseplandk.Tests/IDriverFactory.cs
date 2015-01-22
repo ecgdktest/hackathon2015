@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium.Chrome;
+﻿using System;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 
 namespace Rejseplandk.Tests
@@ -7,12 +9,28 @@ namespace Rejseplandk.Tests
     {
         RemoteWebDriver Create();
     }
+
+    public class IEDriverFactory : IDriverFactory
+    {
+        public RemoteWebDriver Create()
+        {
+            var driverPath = @"..\..\";
+            return new InternetExplorerDriver(driverPath);
+        }
+    }
+
+    class RemoteDriverFactory : IDriverFactory
+    {
+        public RemoteWebDriver Create()
+        {
+            return new RemoteWebDriver(new Uri("http://localhost:8080/wd/hub"), new DesiredCapabilities { IsJavaScriptEnabled = true }, TimeSpan.FromMinutes(1));
+        }
+    }
     class ChromeDriverFactory : IDriverFactory
     {
         public RemoteWebDriver Create()
         {
-            //var driverPath = @"C:\Users\strudsomahon\Downloads\chromedriver_win32";
-            var driverPath = @"C:\Work\ECG.Selenium\ECG.Selenium.Framework\Executables";
+            var driverPath = @"..\..\";
             return new ChromeDriver(driverPath);
         }
 

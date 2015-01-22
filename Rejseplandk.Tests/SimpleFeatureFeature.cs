@@ -75,7 +75,7 @@ namespace Rejseplandk.Tests
                 browserFac.Value.Close();
                 browserFac.Value.Dispose();
             }
-            var driverPath = @"C:\Users\strudsomahon\Downloads\chromedriver_win32";
+            var driverPath = @"C:\Work\ECG.Selenium\ECG.Selenium.Framework\Executables\";
             browserFac = new Lazy<TWebDriver>(() => (TWebDriver) Activator.CreateInstance(typeof(TWebDriver), new []{driverPath}));
         }
     }

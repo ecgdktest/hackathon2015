@@ -11,7 +11,8 @@ namespace Rejseplandk.Tests
     {
         public RemoteWebDriver Create()
         {
-            var driverPath = @"C:\Users\strudsomahon\Downloads\chromedriver_win32";
+            //var driverPath = @"C:\Users\strudsomahon\Downloads\chromedriver_win32";
+            var driverPath = @"C:\Work\ECG.Selenium\ECG.Selenium.Framework\Executables";
             return new ChromeDriver(driverPath);
         }
 

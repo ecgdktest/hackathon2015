@@ -1,62 +1,64 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
 
 namespace Rejseplandk.Tests
 {
     public interface Driver : IDisposable{
-        void Search(string @from, string to);
         void ContainsSearchResult(int p0);
         void ResetDriver();
+        void GotoFrontPage();
+        ISearchBox Search { get; }
     }
 
-    public class PublicWeb<TDriverFactory>: SeleniumBaseClass<TDriverFactory>, Driver where TDriverFactory : IDriverFactory
+    public class SeleniumBase
     {
-        private string url = "http://hackathon.rejseplanen.dk";
+        private readonly RemoteWebDriver _driver;
 
-        public void Search(string @from, string to)
+        public SeleniumBase(RemoteWebDriver driver)
         {
-            Driver.Navigate().GoToUrl(url);
-            Driver.SwitchTo().Frame("rejseplanen");
-            Driver.FindElement(By.Id("hafasfrom")).SendKeys(@from);
-            Driver.FindElement(By.Id("hafasto")).SendKeys(@to);
-            Driver.FindElementByName("start").Click();
+            _driver = driver;
         }
 
-        public void ContainsSearchResult(int p0)
+        protected void SetText(By byId, string value)
         {
-            var readOnlyCollection = Driver.FindElements(By.CssSelector("[id^='ovConRowOUTWARDC']"));
-            Assert.That(readOnlyCollection, Has.Count.AtLeast(p0));
+            _driver.FindElement(byId).SendKeys(value);
         }
 
-    }
-
-    public class MWeb<T> : SeleniumBaseClass<T>, Driver where T : IDriverFactory
-    {
-        private string url = "http://m-hackathon.rejseplanen.dk";
-
-        public void Search(string @from, string to)
+        protected string GetText(By byId)
         {
-            Driver.Navigate().GoToUrl(url);
-            Driver.FindElement(By.Id("tpQuery_from")).SendKeys(@from);
-            Driver.FindElement(By.Id("tpQuery_to")).SendKeys(@to);
-            Driver.FindElement(By.Id("tpSubmitButton")).Click();
+            return _driver.FindElement(byId).Text;
         }
 
-        public void ContainsSearchResult(int p0)
+        protected void Click(By search)
         {
-<<<<<<< HEAD:Rejseplandk.Tests/SimpleFeatureFeature.cs
-            if (browserFac != null && browserFac.IsValueCreated)
+            _driver.FindElement(search).Click();
+        }
+
+        public bool ExistsAndVisibleElement(By by, int timeoutInSeconds = 5)
+        {
+            bool flag = false;
+            try
             {
-                browserFac.Value.Close();
-                browserFac.Value.Dispose();
+                if (timeoutInSeconds > 0)
+                {
+                    IWebElement webElement = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds)).Until(drv => drv.FindElement(@by));
+                    if (webElement != null && webElement.Displayed)
+                        flag = true;
+                }
+                IWebElement element = _driver.FindElement(@by);
+                flag = element != null && element.Displayed;
             }
-            var driverPath = @"C:\Work\ECG.Selenium\ECG.Selenium.Framework\Executables\";
-            browserFac = new Lazy<TWebDriver>(() => (TWebDriver) Activator.CreateInstance(typeof(TWebDriver), new []{driverPath}));
-=======
->>>>>>> origin/master:Rejseplandk.Tests/Rejseplanen.cs
+            catch (Exception ex)
+            {
+            }
+            return flag;
         }
+
+
     }
 
     abstract partial class RejseplanenFeature { }
@@ -85,26 +87,6 @@ namespace Rejseplandk.Tests
         {
             base.ScenarioTearDown();
             _driver.ResetDriver();
-        }
-    }
-
-    public class Rest : Driver
-    {
-        public void Search(string @from, string to)
-        {
-        }
-
-        public void ContainsSearchResult(int p0)
-        {
-        }
-
-        public void Dispose()
-        {
-            ResetDriver();
-        }
-
-        public void ResetDriver()
-        {
         }
     }
 }

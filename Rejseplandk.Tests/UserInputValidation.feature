@@ -2,19 +2,14 @@
 
 Background: 
 Given I am on the frontpage
-	
-Scenario: I see the searchbar on our pages 
-	Then I see the Searchbar
-
-	Given I enter from: 'Tønder Busstation'
-	And I enter to: 'Aarhus H'
-
-	Then I see
 
 
 
-	And I enter the date: '30.04.15' # (today + 6 months)
-	And I enter the time: '25:12:00'
+Scenario: I get selfexplanatory error messages when I use invalid data 
+	Given I enter from: ''
+	And I enter to: ''
+	And I enter the date:	'30.04.15' # (today + 6 months)
+	And I enter the time:	'25:12:00'
 	When I search	
 	Then I see the validation error: 'Skriv den station/stop/adresse, du vil rejse til'
 	Then I see the validation error: 'Skriv den station/stop/adresse, du vil rejse fra'

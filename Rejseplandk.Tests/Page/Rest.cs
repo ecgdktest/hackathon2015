@@ -42,7 +42,8 @@ namespace Rejseplandk.Tests
         public IEnumerable<XElement> Trips { get; private set; }
         public string To { get; set; }
         public string From { get; set; }
-
+        public string Date { get; set; }
+        public string Time { get; set; }
         public void Search()
         {
             using (var client = new HttpClient())

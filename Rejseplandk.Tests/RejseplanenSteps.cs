@@ -33,42 +33,47 @@ namespace Rejseplandk.Tests
    
 
         [Given(@"I pick a date '(.*)'")]
-        public void GivenIPickADate(string p0)
+        public void GivenIPickADate(string date)
         {
-            Driver.Search.ShowSearchBar();
-            ScenarioContext.Current.Pending();
+            Driver.Search.Date = date;
         }
-        
+
         [When(@"I enter the time:\t'(.*)'")]
-        public void WhenIEnterTheTime(string p0)
+        public void WhenIEnterTheTime(string time)
+        {
+            Driver.Search.Time = time;
+        }
 
         [Given(@"I choose traveltype '(.*)'")]
         public void GivenIChooseTraveltype(string p0)
         {
             ScenarioContext.Current.Pending();
         }
-        
+
         [Then(@"I see the Searchbar")]
         public void ThenISeeTheSearchbar()
+        {
+            Driver.Search.SearchBarIsVisible();
+        }
 
         [Given(@"I pick return '(.*)'")]
         public void GivenIPickReturn(string p0)
         {
-            Driver.Search.SearchBarIsVisible();
-            ScenarioContext.Current.Pending();
+            Driver.Search.ShowSearchBar();
         }
-        
+
         [Then(@"I see search results")]
         public void ThenISeeSearchResults()
+        {
+            ScenarioContext.Current.Get<Driver>().ContainsSearchResult(3);
+        }
+
 
         [Then(@"take a screenshoot")]
         public void ThenTakeAScreenshoot()
         {
             ScenarioContext.Current.Pending();
         }
-
-    
-
 
         [Then(@"I get at least (.*) travelplan")]
         public void ThenIGetAtLeastTravelplan(int p0)

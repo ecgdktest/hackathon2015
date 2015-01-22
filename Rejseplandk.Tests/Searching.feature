@@ -6,8 +6,6 @@ Scenario: I can search for a journey
 	When I Search
 	Then I get at least 3 travelplan
 
-	#Given I select a travel result
-	#Then I see the travel details 
 
 @UI	
 Scenario: I can see the searchbar on all pages 

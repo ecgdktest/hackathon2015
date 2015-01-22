@@ -8,9 +8,10 @@ Given I am on the frontpage
 Scenario: I get selfexplanatory error messages when I use invalid data 
 	Given I enter from: ''
 	And I enter to: ''
-	And I enter the date:	'30.04.15' # (today + 6 months)
-	And I enter the time:	'25:12:00'
-	When I search	
+	And I enter the date:'30.04.15' 
+	# (today + 3 months)
+	And I enter the time:'25:12:00'
+	Given I search	
 	Then I see the validation error: 'Skriv den station/stop/adresse, du vil rejse til'
 	Then I see the validation error: 'Skriv den station/stop/adresse, du vil rejse fra'
 	Then I see the validation error: 'ligger udenfor køreplanens gyldighedsperiode'

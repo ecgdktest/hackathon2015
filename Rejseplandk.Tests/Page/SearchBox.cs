@@ -54,7 +54,7 @@ namespace Rejseplandk.Tests
             Click(_search);
         }
 
-        public void Expand()
+        public void ShowSearchBar()
         {
             Click(_expand);
         }
